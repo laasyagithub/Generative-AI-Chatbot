@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive AI Project</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(to right, rgb(0, 0, 0), #1F2937);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .description-container {
+            width: 65%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .heading {
+            font-size: 50px;
+            font-weight: 900;
+            color: white;
+        }
+
+        .about-section {
+            background-color: rgba(30, 41, 59, 0.8);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #1e293b;
+            max-width: 760px;
+        }
+
+        .topics-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .topic-icon {
+            padding: 16px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #1e293b;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            padding: 10px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .social-icon img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Description Section -->
+        <div class="description-container">
+            <div class="heading">Generative AI Project</div>
+            <div class="about-section">Description of the selected icon will appear here.</div>
+            <div class="topics-list">
+                <div id="googleColab" class="topic-icon tooltip">Google Colab</div>
+                <div id="gradio" class="topic-icon tooltip">Gradio</div>
+                <div id="openAi" class="topic-icon tooltip">OpenAI</div>
+                <div id="playHt" class="topic-icon tooltip">PlayHT</div>
+                <div id="huggingFace" class="topic-icon tooltip">HuggingFace</div>
+                <div id="langChain" class="topic-icon tooltip">LangChain</div>
+            </div>
+        </div>
+
+        <!-- Social Media Section -->
+        <div class="social-icons">
+            <div class="social-icon twitter">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" alt="Twitter">
+            </div>
+            <div class="social-icon linkedin">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+            </div>
+            <div class="social-icon whatsapp">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Social Media Sharing
+        const socialIconButtons = document.getElementsByClassName("social-icon");
+
+        function postToSocialMedia(classList) {
+            const content = `Check out my cool generative AI Project 😎 \n${window.location.href}`;
+            if (classList.contains("twitter")) {
+                const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(content)}`;
+                window.open(url);
+            } else if (classList.contains("linkedin")) {
+                const url = `https://www.linkedin.com/share?text=${encodeURIComponent(content)}`;
+                window.open(url);
+            } else if (classList.contains("whatsapp")) {
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(content)}`);
+            }
+        }
+
+        const addEventListenersToSocialIconButton = () => {
+            for (let i = 0; i < socialIconButtons.length; i++) {
+                socialIconButtons[i].addEventListener("click", () =>
+                    postToSocialMedia(socialIconButtons[i].classList)
+                );
+            }
+        };
+
+        addEventListenersToSocialIconButton();
+
+        // Skill Description Updates
+        const skillIcons = document.getElementsByClassName("tooltip");
+        const descriptionDiv = document.getElementsByClassName("about-section")[0];
+
+        const updateDescription = (id) => {
+            let description = "";
+            switch (id) {
+                case "googleColab":
+                    description = "Google Colab: User-friendly platform for code writing, execution, and sharing. Beloved by AI experts, students, developers, and researchers for data analysis, ML, and AI exploration.";
+                    break;
+                case "gradio":
+                    description = "Gradio: A user-friendly tool that allows to create and share interactive Al Apps without extensive Coding Knowledge.";
+                    break;
+                case "openAi":
+                    description = "OpenAI: An AI-based chat service powered by Open AI's language model. OpenAI APIs offer access to advanced language models and AI capabilities.";
+                    break;
+                case "playHt":
+                    description = "PlayHT: PlayHT is a platform that allows you to clone voices using artificial intelligence. The platform uses a deep learning model to train a voice clone.";
+                    break;
+                case "huggingFace":
+                    description = "HuggingFace: The ultimate destination for building, training, and deploying cutting-edge machine learning models!";
+                    break;
+                case "langChain":
+                    description = "LangChain: Seamlessly combine Large Language Models (LLMs) with external computation/data. Build chatbots, analyze data effortlessly.";
+                    break;
+                default:
+                    description = "Description of the selected icon will appear here.";
+            }
+            descriptionDiv.textContent = description;
+        };
+
+        const addEventListenersToSkillIcons = () => {
+            for (let i = 0; i < skillIcons.length; i++) {
+                skillIcons[i].addEventListener("click", (e) => updateDescription(e.target.id));
+            }
+        };
+
+        addEventListenersToSkillIcons();
+    </script>
+</body>
+
+</html>
